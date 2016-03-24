@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="yCI-LA-30S">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <scenes>
+        <!--Root View Controller-->
+        <scene sceneID="Phz-xk-wHL">
+            <objects>
+                <navigationController storyboardIdentifier="RootViewController" id="yCI-LA-30S" customClass="RootViewController" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5aH-m3-m7i">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="9yg-BL-OjX" kind="presentation" identifier="presetnLoginViewController" animates="NO" id="Pj6-4P-jrz"/>
+                        <segue destination="BJr-7S-vrN" kind="relationship" relationship="rootViewController" id="Xnn-1c-sC5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YBZ-aw-0Zt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="860" y="501"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="WZb-vc-8dE">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="BJr-7S-vrN" customClass="ViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="rtt-Zu-UFh"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H0R-Ha-9cH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1537" y="501"/>
+        </scene>
+        <!--Feed Grid View Controller-->
+        <scene sceneID="d8r-nU-dOg">
+            <objects>
+                <collectionViewController storyboardIdentifier="FeedGridViewController" automaticallyAdjustsScrollViewInsets="NO" id="D7M-rP-jA0" customClass="FeedGridViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="Dpz-F3-xPK">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewLayout key="collectionViewLayout" id="cFM-3Q-hdJ" customClass="FeedGridCollectionViewLayout"/>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="D7M-rP-jA0" id="x7X-Uy-MzS"/>
+                            <outlet property="delegate" destination="D7M-rP-jA0" id="C8d-mD-EwL"/>
+                        </connections>
+                    </collectionView>
+                    <connections>
+                        <outlet property="_collectionViewLayout" destination="cFM-3Q-hdJ" id="pmU-2g-Vql"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ipi-bP-kWw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1542" y="1265"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="ljT-Rq-pSV">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" id="9yg-BL-OjX" customClass="LoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Je8-Az-SVA"/>
+                        <viewControllerLayoutGuide type="bottom" id="wzq-Ih-Rak"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="msK-H6-VuX">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gcA-Ya-guC">
+                                <rect key="frame" x="220" y="275" width="160" height="50"/>
+                                <color key="backgroundColor" red="0.33333333333333331" green="0.67450980392156867" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="5ma-xk-STr"/>
+                                    <constraint firstAttribute="height" constant="50" id="htO-WX-3UI"/>
+                                </constraints>
+                                <state key="normal" title="Login with Twitter">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onLogin:" destination="9yg-BL-OjX" eventType="touchUpInside" id="YBc-KG-myy"/>
+                                </connections>
+                            </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="there is no twitter account. please create one" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Owu-54-bt6">
+                                <rect key="frame" x="154" y="338" width="292" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="0.41568627450000001" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gcA-Ya-guC" firstAttribute="centerY" secondItem="msK-H6-VuX" secondAttribute="centerY" id="Jpb-QK-4my"/>
+                            <constraint firstItem="gcA-Ya-guC" firstAttribute="centerX" secondItem="msK-H6-VuX" secondAttribute="centerX" id="Y6i-9q-wor"/>
+                            <constraint firstItem="Owu-54-bt6" firstAttribute="centerX" secondItem="msK-H6-VuX" secondAttribute="centerX" id="fiN-HC-c7a"/>
+                            <constraint firstItem="Owu-54-bt6" firstAttribute="top" secondItem="gcA-Ya-guC" secondAttribute="bottom" constant="13" id="rse-2I-Tgc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="_labelError" destination="Owu-54-bt6" id="CEC-gd-QMh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PJj-S6-wdt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="549" y="1430"/>
+        </scene>
+    </scenes>
+</document>
