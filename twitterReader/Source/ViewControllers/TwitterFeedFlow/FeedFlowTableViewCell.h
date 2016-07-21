@@ -45,5 +45,6 @@
 
 - (void)prepareToPresentation;
 - (void)finishPresentation;
+- (void)startPlayback;
 
 @end

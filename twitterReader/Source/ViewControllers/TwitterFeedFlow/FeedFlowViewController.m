@@ -12,7 +12,7 @@
 
 
 @interface FeedFlowViewController () {
-    
+    BOOL _scrolling;
 }
 
 @end
@@ -24,6 +24,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _scrolling = NO;
     
     CGRect r = self.navigationController.navigationBar.frame;
     self.tableView.contentInset = UIEdgeInsetsMake(CGRectGetMaxY(r), 0, 0, 0);
@@ -70,6 +72,8 @@
         [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
     }
     [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    [self startPlayback];
 }
 
 - (void)reloadData
@@ -87,6 +91,19 @@
     [_refresh endRefreshing];
 }
 
+- (void)startPlayback
+{
+    if (_scrolling) {
+        return;
+    }
+    
+    NSArray *indexPaths = [self.tableView indexPathsForVisibleRows];
+    for (NSIndexPath *path in indexPaths) {
+        FeedFlowTableViewCell *tweetCell = (FeedFlowTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
+        [tweetCell startPlayback];
+    }
+}
+
 #pragma mark - Table view delegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -101,12 +118,26 @@
 {
     FeedFlowTableViewCell *tweetCell = (FeedFlowTableViewCell*)cell;
     [tweetCell prepareToPresentation];
+    if (!_scrolling) {
+        [tweetCell startPlayback];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FeedFlowTableViewCell *tweetCell = (FeedFlowTableViewCell*)cell;
     [tweetCell finishPresentation];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    _scrolling = NO;
+    [self startPlayback];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    _scrolling = YES;
 }
 
 #pragma mark - Table view data source

@@ -147,4 +147,9 @@
     [_viewTweetMedia finishPresentation];
 }
 
+- (void)startPlayback
+{
+    [_viewTweetMedia startPlayback];
+}
+
 @end

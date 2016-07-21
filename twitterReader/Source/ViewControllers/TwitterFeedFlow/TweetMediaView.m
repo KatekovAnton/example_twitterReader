@@ -109,6 +109,7 @@ typedef NS_ENUM(NSUInteger, TweetMediaInternalViewAlignment) {
     
     if (_finalImage) {
         [_finalImage removeFromSuperview];
+        [_finalImage sd_cancelCurrentImageLoad];
         _finalImage = nil;
     }
     
@@ -179,13 +180,14 @@ typedef NS_ENUM(NSUInteger, TweetMediaInternalViewAlignment) {
 {
     if ([self.data.media.type isEqualToString:@"video"]) {// ||
 //        [self.data.media.type isEqualToString:@"animated_gif"]) {
+        // todo: handle gifs correctly
         
         if (!_playable)
             return;
         
         [self finishPresentation];
         
-        NSArray *variants = self.data.media.videoInfo [@"variants"];
+        NSArray *variants = self.data.media.videoInfo[@"variants"];
         NSString *videoUrl = nil;
         NSNumber *bitrate = nil;
         for (NSDictionary *v in variants) {
@@ -198,8 +200,6 @@ typedef NS_ENUM(NSUInteger, TweetMediaInternalViewAlignment) {
         if (!videoUrl) {
             return;
         }
-    
-        
         
         AVPlayer *player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:videoUrl]];
         player.volume = 1;
@@ -213,13 +213,7 @@ typedef NS_ENUM(NSUInteger, TweetMediaInternalViewAlignment) {
         // unsatisfied constraints errors.
         // better way is to replace with your own ui
         
-        // todo: autoloop or smth
-
-        [self addSubview:_videoPlayer.view];
-        [_videoPlayer.view autoPinEdgeToSuperviewEdges];
-        _videoPlayer.view.backgroundColor = [UIColor clearColor];
-
-        [_videoPlayer.player play];
+        
     }
 }
 
@@ -230,6 +224,27 @@ typedef NS_ENUM(NSUInteger, TweetMediaInternalViewAlignment) {
         [_videoPlayer.view removeFromSuperview];
         _videoPlayer = nil;
     }
+}
+
+- (void)startPlayback
+{
+    if (_videoPlayer == nil) {
+        return;
+    }
+    
+    if (_videoPlayer.isViewLoaded &&
+        _videoPlayer.view.superview != nil) {
+        return;
+    }
+    
+    // todo: autoloop or smth
+    
+    [self addSubview:_videoPlayer.view];
+    [_videoPlayer.view autoPinEdgeToSuperviewEdges];
+    _videoPlayer.view.backgroundColor = [UIColor clearColor];
+    [self layoutIfNeeded];
+    
+    [_videoPlayer.player play];
 }
 
 @end
@@ -264,6 +279,11 @@ typedef NS_ENUM(NSUInteger, TweetMediaInternalViewAlignment) {
 - (void)finishPresentation
 {
     [_internalView finishPresentation];
+}
+
+- (void)startPlayback
+{
+    [_internalView startPlayback];
 }
 
 @end
