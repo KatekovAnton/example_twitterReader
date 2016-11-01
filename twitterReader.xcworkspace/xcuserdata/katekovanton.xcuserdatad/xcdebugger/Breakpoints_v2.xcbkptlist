@@ -32,13 +32,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "twitterReader/Source/ViewControllers/TwitterFeedGrid/FeedGridCollectionViewCell.m"
-            timestampString = "474567393.297426"
+            timestampString = "499698909.272299"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "-setTweet:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

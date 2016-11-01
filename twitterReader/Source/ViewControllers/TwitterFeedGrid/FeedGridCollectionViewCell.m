@@ -21,7 +21,10 @@
 
 @implementation FeedGridCollectionViewCell
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
     self.layer.borderColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.6 alpha:0.3].CGColor;
     self.layer.borderWidth = 1;
     self.layer.cornerRadius = 3;

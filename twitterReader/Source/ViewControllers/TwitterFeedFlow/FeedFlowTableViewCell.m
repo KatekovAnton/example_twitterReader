@@ -29,6 +29,8 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+    
     UIView *separator = [[UIView alloc] init];
     separator.backgroundColor = [UIColor colorFromHex:0xaab8c2];
     [self addSubview:separator];
